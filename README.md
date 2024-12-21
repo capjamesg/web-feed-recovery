@@ -4,7 +4,7 @@ This repository contains a script that aims to find a new version of a web feed 
 
 This repository takes a list of feed URLs that are known to be 404s and attempts to find new feeds.
 
-On a test of 160 broken feeds from the real-world, this project recovered 67%.
+On a test of 160 broken feeds from the real world, this project recovered 67%.
 
 ## Installation
 

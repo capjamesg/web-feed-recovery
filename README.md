@@ -27,13 +27,13 @@ Results will be saved to a file called `results.json` with the structure:
   {
     "original_feed": "https://blog.autumnrain.cc",
     "found_feeds": {
-        'https://blog.autumnrain.cc/rss/': 'application/rss+xml'
+        "https://blog.autumnrain.cc/rss/": "application/rss+xml"
     }
   }
 ]
 ```
 
-The key-value pairs are the found feed URL mapped to the found MIME type, if any.
+The key-value pairs are the found feed URL mapped to the found MIME type, if a feed was found through HTTP header discovery.
 
 ## Algorithm
 

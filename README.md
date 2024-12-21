@@ -4,6 +4,30 @@ This repository contains a script that aims to find a new version of a web feed 
 
 This repository takes a list of feed URLs that are known to be 404s and attempts to find new feeds.
 
+## Installation
+
+First, clone this project:
+
+```
+git clone https://github.com/capjamesg/web-feed-recovery
+```
+
+Then, create a file called `feeds.txt` and add feeds that are known to be broken. Add one feed URL per line.
+
+Then, run:
+
+```
+app.py
+```
+
+Results will be saved to a file called `results.json` with the structure:
+
+```
+[
+  {"original_feed": "https://blog.autumnrain.cc", "found_feeds": {'https://blog.autumnrain.cc/rss/': 'application/rss+xml'}}
+]
+```
+
 ## Algorithm
 
 1. Go to the homepage of the site associated with the feed.

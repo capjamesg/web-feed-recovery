@@ -4,6 +4,7 @@ from urllib.parse import urlparse, urljoin
 from bs4 import BeautifulSoup
 import tqdm
 import indieweb_utils
+import json
 
 with open("failed.txt", "r") as f:
     broken_feeds = f.read().splitlines()
@@ -22,6 +23,9 @@ INDICATIVE_TERMS = [
 def canonicalize_url(url, domain):
     if isinstance(url, tuple):
         url = url[0]
+
+    if not url.startswith("http"):
+        url = "/" + url
 
     if url.startswith("/"):
         return urljoin("https://" + domain, url)
@@ -62,7 +66,7 @@ def search_for_indicative_terms(content, url):
     found_feeds = {}
 
     for link in links:
-        if any(term in link.get("href") for term in INDICATIVE_TERMS):
+        if any(term in link.get_text() for term in INDICATIVE_TERMS):
             found_feeds[link.get("href")] = link.get("type")
 
     return found_feeds.items()
@@ -111,6 +115,7 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
     )
 
 failed_count = 0
+all_reconciled_feeds = []
 
 for feed_url, response in results:
     if response is None:
@@ -147,8 +152,15 @@ for feed_url, response in results:
     }
 
     if not found_feeds:
-        print("Failed to find feeds for", feed_url)
+        # print("Failed to find feeds for", feed_url)
         failed_count += 1
+    if found_feeds:
+        print(feed_url, found_feeds)
+
+    all_reconciled_feeds.append({"original_url": feed_url, "found_feeds": found_feeds})
 
 print("Count: ", failed_count)
 print("Rate of feeds potentially recoverable: ", (len(broken_feeds) - failed_count) / len(broken_feeds))
+
+with open("results.json", "w") as f:
+    json.dump(all_reconciled_feeds, f, indent=4)

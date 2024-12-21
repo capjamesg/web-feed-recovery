@@ -33,7 +33,9 @@ Results will be saved to a file called `results.json` with the structure:
 ]
 ```
 
-The key-value pairs are the found feed URL mapped to the found MIME type, if a feed was found through HTTP header discovery.
+The key-value pairs are the found feed URL mapped to the found MIME type.
+
+MIME types are only added if a feed was found through HTTP header discovery. Otherwise, the MIME type will be null.
 
 ## Algorithm
 

@@ -42,9 +42,9 @@ MIME types are only added if a feed was found through HTTP header discovery. If 
 ## Algorithm
 
 1. Go to the homepage of the site associated with the feed.
-2. Check the HTTP headers and HTML `<meta>` tags for signals of a feed (using the [indieweb-utils feed discovery implementation](https://indieweb-utils.readthedocs.io/en/latest/discovery.html#indieweb_utils.discover_web_page_feeds)).
+2. Check the HTTP headers and HTML `<link>` tags for signals of a feed (using the [indieweb-utils feed discovery implementation](https://indieweb-utils.readthedocs.io/en/latest/discovery.html#indieweb_utils.discover_web_page_feeds)).
 3. Check for instances of several link anchors indicative of a feed (i.e. "RSS", "RSS Feed"). Save those as potential new feeds.
-4. Check for instances of link anchors for several blog-related terms, like "Blog" and "Writing". Go to those pages, perform HTTP header and HTML meta tag analysis, and save any feeds.
+4. Check for instances of link anchors for several blog-related terms, like "Blog" and "Writing". Go to those pages, perform HTTP header and HTML `<link>` tag analysis, and save any feeds.
 5. Present all discovered feeds.
 
 ### Limitations
